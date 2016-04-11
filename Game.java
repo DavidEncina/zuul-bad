@@ -45,13 +45,13 @@ public class Game
         armeria = new Room("en una habitacion llena de armas");
 
         // initialise room exits
-        // norte, este, sur, oeste
-        entrada.setExits(null, null, salaPrincipal, null);
-        salaPrincipal.setExits(entrada, celda2, pasillo, celda1);
-        celda1.setExits(null, salaPrincipal, null, null);
-        celda2.setExits(null, null, null, salaPrincipal);
-        pasillo.setExits(salaPrincipal, armeria, null, null);
-        armeria.setExits(null, null, null, pasillo);
+        // norte, este, sur, oeste, sureste
+        entrada.setExits(null, null, salaPrincipal, null, null);
+        salaPrincipal.setExits(entrada, celda2, pasillo, celda1, null);
+        celda1.setExits(null, salaPrincipal, null, null, null);
+        celda2.setExits(null, null, null, salaPrincipal, null);
+        pasillo.setExits(salaPrincipal, null, null, null, armeria);
+        armeria.setExits(celda2, null, null, null, null);
 
         currentRoom = entrada;  // start game outside
     }
@@ -71,7 +71,7 @@ public class Game
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
-        System.out.println("Thank you for playing.  Good bye.");
+        System.out.println("Gracias por jugar. Vuelve pronto.");
     }
 
     /**
@@ -81,8 +81,8 @@ public class Game
     {
         System.out.println();
         System.out.println("Bienvenido al Mundo de Zuul!");
-        System.out.println("El mundo de Zuul es un nuevo juego, incredibly boring adventure game.");
-        System.out.println("Type 'help' if you need help.");
+        System.out.println("El Mundo de Zuul es un nuevo juego, y es una aventura muy aburrida.");
+        System.out.println("Ecribe 'help' si necesitas ayuda.");
         System.out.println();
         printLocationInfo();
         System.out.println();
@@ -98,7 +98,7 @@ public class Game
         boolean wantToQuit = false;
 
         if(command.isUnknown()) {
-            System.out.println("I don't know what you mean...");
+            System.out.println("No entiendo lo que dices...");
             return false;
         }
 
@@ -160,9 +160,12 @@ public class Game
         if(direction.equals("west")) {
             nextRoom = currentRoom.westExit;
         }
+        if(direction.equals("southEast")) {
+            nextRoom = currentRoom.southEastExit;
+        }
 
         if (nextRoom == null) {
-            System.out.println("There is no door!");
+            System.out.println("Ahi no hay puerta!");
         }
         else {
             currentRoom = nextRoom;
@@ -193,7 +196,7 @@ public class Game
     private void printLocationInfo()
     {
         System.out.println("Estas " + currentRoom.getDescription());
-        System.out.print("Exits: ");
+        System.out.print("Salidas: ");
         if(currentRoom.northExit != null) {
             System.out.print("north ");
         }
@@ -205,6 +208,9 @@ public class Game
         }
         if(currentRoom.westExit != null) {
             System.out.print("west ");
+        }
+        if(currentRoom.southEastExit != null) {
+            System.out.print("southEast ");
         }
     }
 }
