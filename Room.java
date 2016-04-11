@@ -55,50 +55,102 @@ public class Room
     }
 
     /**
+     * Devuelve la habitacion a la que se puede salir desde la direccion introducida por parametro.
+     * Si no hay ningula devuelve null.
+     */
+    public Room getExit (String direction)
+    {
+        Room habitacionConSalida = null;
+        if(direction.equals("north")) {
+            habitacionConSalida = salidaNorte();
+        }
+        if(direction.equals("east")) {
+            habitacionConSalida = salidaEste();
+        }
+        if(direction.equals("south")) {
+            habitacionConSalida = salidaSur();
+        }
+        if(direction.equals("west")) {
+            habitacionConSalida = salidaOeste();
+        }
+        if(direction.equals("southEast")) {
+            habitacionConSalida = salidaSureste();
+        }
+        return habitacionConSalida;
+    }
+
+    /**
+     * Return a description of the room's exits.
+     * For example: "Exits: north east west"
+     *
+     * @ return A description of the available exits.
+     */
+    public String getExitString()
+    {
+        String devuelve = "";
+        if(salidaNorte() != null) {
+            devuelve += "north ";
+        }
+        if(salidaEste() != null) {
+            devuelve += "east ";
+        }
+        if(salidaSur() != null) {
+            devuelve += "south ";
+        }
+        if(salidaOeste() != null) {
+            devuelve += "west ";
+        }
+        if(salidaSureste() != null) {
+            devuelve += "southEast ";
+        }
+        return devuelve;
+    }
+
+    /**
      * @return The description of the room.
      */
     public String getDescription()
     {
         return description;
     }
-    
+
     /**
      * Devuelve northExit
      */
     public Room salidaNorte()
     {
-         return northExit;
+        return northExit;
     }
-    
+
     /**
      * Devuelve southExit
      */
     public Room salidaSur()
     {
-         return southExit;
+        return southExit;
     }
-    
+
     /**
      * Devuelve eastExit
      */
     public Room salidaEste()
     {
-         return eastExit;
+        return eastExit;
     }
-    
+
     /**
      * Devuelve westExit
      */
     public Room salidaOeste()
     {
-         return westExit;
+        return westExit;
     }
-    
+
     /**
      * Devuelve southEastExit
      */
     public Room salidaSureste()
     {
-         return southEastExit;
+        return southEastExit;
     }
 }
