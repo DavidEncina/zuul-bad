@@ -46,12 +46,12 @@ public class Game
 
         // initialise room exits
         // norte, este, sur, oeste, sureste
-        entrada.setExits(null, null, salaPrincipal, null, null);
-        salaPrincipal.setExits(entrada, celda2, pasillo, celda1, null);
-        celda1.setExits(null, salaPrincipal, null, null, null);
-        celda2.setExits(null, null, null, salaPrincipal, null);
-        pasillo.setExits(salaPrincipal, null, null, null, armeria);
-        armeria.setExits(celda2, null, null, null, null);
+        entrada.setExits(null, null, salaPrincipal, null, null, null);
+        salaPrincipal.setExits(entrada, celda2, pasillo, celda1, null, null);
+        celda1.setExits(null, salaPrincipal, null, null, null, null);
+        celda2.setExits(null, null, null, salaPrincipal, null, null);
+        pasillo.setExits(salaPrincipal, null, null, null, armeria, null);
+        armeria.setExits(celda2, null, null, null, null, null);
 
         currentRoom = entrada;  // start game outside
     }
@@ -182,7 +182,6 @@ public class Game
     {
         System.out.println("Estas " + currentRoom.getDescription());
         System.out.print("Salidas: ");
-        System.out.print(currentRoom.getExitString());        
-        
+        System.out.print(currentRoom.getExitString());       
     }
 }
