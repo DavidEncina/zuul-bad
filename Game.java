@@ -149,19 +149,19 @@ public class Game
         // Try to leave current room.
         Room nextRoom = null;
         if(direction.equals("north")) {
-            nextRoom = currentRoom.northExit;
+            nextRoom = currentRoom.salidaNorte();
         }
         if(direction.equals("east")) {
-            nextRoom = currentRoom.eastExit;
+            nextRoom = currentRoom.salidaEste();
         }
         if(direction.equals("south")) {
-            nextRoom = currentRoom.southExit;
+            nextRoom = currentRoom.salidaSur();
         }
         if(direction.equals("west")) {
-            nextRoom = currentRoom.westExit;
+            nextRoom = currentRoom.salidaOeste();
         }
         if(direction.equals("southEast")) {
-            nextRoom = currentRoom.southEastExit;
+            nextRoom = currentRoom.salidaSureste();
         }
 
         if (nextRoom == null) {
@@ -197,19 +197,19 @@ public class Game
     {
         System.out.println("Estas " + currentRoom.getDescription());
         System.out.print("Salidas: ");
-        if(currentRoom.northExit != null) {
+        if(currentRoom.salidaNorte() != null) {
             System.out.print("north ");
         }
-        if(currentRoom.eastExit != null) {
+        if(currentRoom.salidaEste() != null) {
             System.out.print("east ");
         }
-        if(currentRoom.southExit != null) {
+        if(currentRoom.salidaSur() != null) {
             System.out.print("south ");
         }
-        if(currentRoom.westExit != null) {
+        if(currentRoom.salidaOeste() != null) {
             System.out.print("west ");
         }
-        if(currentRoom.southEastExit != null) {
+        if(currentRoom.salidaSureste() != null) {
             System.out.print("southEast ");
         }
     }

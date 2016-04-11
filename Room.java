@@ -14,12 +14,12 @@
  */
 public class Room 
 {
-    public String description;
-    public Room northExit;
-    public Room southExit;
-    public Room eastExit;
-    public Room westExit;
-    public Room southEastExit;
+    private String description;
+    private Room northExit;
+    private Room southExit;
+    private Room eastExit;
+    private Room westExit;
+    private Room southEastExit;
 
     /**
      * Create a room described "description". Initially, it has
@@ -61,5 +61,44 @@ public class Room
     {
         return description;
     }
-
+    
+    /**
+     * Devuelve northExit
+     */
+    public Room salidaNorte()
+    {
+         return northExit;
+    }
+    
+    /**
+     * Devuelve southExit
+     */
+    public Room salidaSur()
+    {
+         return southExit;
+    }
+    
+    /**
+     * Devuelve eastExit
+     */
+    public Room salidaEste()
+    {
+         return eastExit;
+    }
+    
+    /**
+     * Devuelve westExit
+     */
+    public Room salidaOeste()
+    {
+         return westExit;
+    }
+    
+    /**
+     * Devuelve southEastExit
+     */
+    public Room salidaSureste()
+    {
+         return southEastExit;
+    }
 }
