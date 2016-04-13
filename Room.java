@@ -17,12 +17,6 @@ import java.util.HashMap;
 public class Room 
 {
     private String description;
-    private Room northExit;
-    private Room southExit;
-    private Room eastExit;
-    private Room westExit;
-    private Room southEastExit;
-    private Room nothWestExit;
     private HashMap<String, Room> salidas;
 
     /**
@@ -38,33 +32,13 @@ public class Room
     }
 
     /**
-     * Define the exits of this room.  Every direction either leads
-     * to another room or is null (no exit there).
-     * @param north The north exit.
-     * @param east The east east.
-     * @param south The south exit.
-     * @param west The west exit.
+     * Define an exit from this room.
+     * @param direction The direction of the exit.
+     * @param neighbor The room in the given direction.
      */
-    public void setExits(Room north, Room east, Room south, Room west, Room southEast, Room northWest) 
+    public void setExit(String direction, Room neighbor)
     {
-        if(north != null)
-            northExit = north;
-            salidas.put("north", north);        
-        if(east != null)
-            eastExit = east;
-            salidas.put("east", east);
-        if(south != null)
-            southExit = south;
-            salidas.put("south", south);
-        if(west != null)
-            westExit = west;
-            salidas.put("west", west);
-        if(southEast != null)
-            southEastExit = southEast;
-            salidas.put("southEast", southEast);
-        if(northWest != null)
-            nothWestExit = northWest;
-            salidas.put("northWest", northWest);
+        salidas.put(direction, neighbor);
     }
 
     /**
@@ -104,22 +78,22 @@ public class Room
     public String getExitString()
     {
         String devuelve = "";
-        if(northExit != null) {
+        if(salidas.get("north") != null) {
             devuelve += "north ";
         }
-        if(eastExit != null) {
+        if(salidas.get("east") != null) {
             devuelve += "east ";
         }
-        if(southExit != null) {
+        if(salidas.get("south") != null) {
             devuelve += "south ";
         }
-        if(westExit != null) {
+        if(salidas.get("west") != null) {
             devuelve += "west ";
         }
-        if(southEastExit != null) {
+        if(salidas.get("southEast") != null) {
             devuelve += "southEast ";
         }
-        if(nothWestExit != null) {
+        if(salidas.get("northWest") != null) {
             devuelve += "northWest ";
         }
         return devuelve;

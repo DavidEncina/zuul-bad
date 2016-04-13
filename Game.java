@@ -45,13 +45,18 @@ public class Game
         armeria = new Room("en una habitacion llena de armas");
 
         // initialise room exits
-        // norte, este, sur, oeste, sureste
-        entrada.setExits(null, null, salaPrincipal, null, null, null);
-        salaPrincipal.setExits(entrada, celda2, pasillo, celda1, null, null);
-        celda1.setExits(null, salaPrincipal, null, null, null, null);
-        celda2.setExits(null, null, null, salaPrincipal, null, null);
-        pasillo.setExits(salaPrincipal, null, null, null, armeria, null);
-        armeria.setExits(celda2, null, null, null, null, null);
+        // norte, este, sur, oeste, sureste, noroeste
+        entrada.setExit("south", salaPrincipal);
+        salaPrincipal.setExit("north", entrada);
+        salaPrincipal.setExit("south", pasillo);
+        salaPrincipal.setExit("east", celda2);
+        salaPrincipal.setExit("west", celda1);
+        celda1.setExit("east", salaPrincipal);
+        celda2.setExit("west", salaPrincipal);
+        pasillo.setExit("north", salaPrincipal);
+        pasillo.setExit("southEast", armeria);
+        armeria.setExit("northWest", pasillo);
+        armeria.setExit("north", celda2);
 
         currentRoom = entrada;  // start game outside
     }
