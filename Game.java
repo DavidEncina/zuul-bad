@@ -57,6 +57,14 @@ public class Game
         pasillo.setExit("southEast", armeria);
         armeria.setExit("northWest", pasillo);
         armeria.setExit("north", celda2);
+        
+        // crea un item en las habitaciones
+        entrada.creaItem("piedra", 0.20f);
+        salaPrincipal.creaItem("antorcha", 0.50f);
+        celda1.creaItem("hueso", 0.25f);
+        celda2.creaItem("escudo", 2.20f);
+        pasillo.creaItem("piedra", 0.15f);
+        armeria.creaItem("espada", 1.50f);        
 
         currentRoom = entrada;  // start game outside
     }

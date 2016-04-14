@@ -18,6 +18,8 @@ public class Room
 {
     private String description;
     private HashMap<String, Room> salidas;
+    private String descripcion;
+    private float peso;
 
     /**
      * Create a room described "description". Initially, it has
@@ -29,6 +31,15 @@ public class Room
     {
         this.description = description;
         salidas = new HashMap<String, Room>();
+    }
+    
+    /**
+     * Crea un objeto para las habitaciones
+     */
+    public void creaItem(String descripcion, float peso)
+    {
+        this.descripcion = descripcion;
+        this.peso = peso;
     }
 
     /**
@@ -83,6 +94,6 @@ public class Room
      */
     public String getLongDescription()
     {
-        return "Estas " + description + "\nSalidas: " + getExitString();
+        return "Estas " + description + "\nSalidas: " + getExitString() + "\nObjeto: " + descripcion + "  ---  Peso: " + peso;
     }
 }
