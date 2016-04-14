@@ -60,24 +60,9 @@ public class Room
      */
     public String getExitString()
     {
-        String devuelve = "";
-        if(salidas.get("north") != null) {
-            devuelve += "north ";
-        }
-        if(salidas.get("east") != null) {
-            devuelve += "east ";
-        }
-        if(salidas.get("south") != null) {
-            devuelve += "south ";
-        }
-        if(salidas.get("west") != null) {
-            devuelve += "west ";
-        }
-        if(salidas.get("southEast") != null) {
-            devuelve += "southEast ";
-        }
-        if(salidas.get("northWest") != null) {
-            devuelve += "northWest ";
+        String devuelve = "";       
+        for (String key : salidas.keySet()){
+            devuelve += key + " ";
         }
         return devuelve;
     }
