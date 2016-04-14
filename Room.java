@@ -48,24 +48,7 @@ public class Room
     public Room getExit (String direction)
     {
         Room habitacionConSalida = null;
-        if(direction.equals("north")) {
-            habitacionConSalida = salidas.get("north");
-        }
-        if(direction.equals("east")) {
-            habitacionConSalida = salidas.get("east");
-        }
-        if(direction.equals("south")) {
-            habitacionConSalida = salidas.get("south");
-        }
-        if(direction.equals("west")) {
-            habitacionConSalida = salidas.get("west");
-        }
-        if(direction.equals("southEast")) {
-            habitacionConSalida = salidas.get("southEast");
-        }
-        if(direction.equals("northWest")) {
-            habitacionConSalida = salidas.get("northWest");
-        }
+        habitacionConSalida = salidas.get(direction);
         return habitacionConSalida;
     }
 
