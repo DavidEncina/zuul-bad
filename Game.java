@@ -18,7 +18,12 @@
 public class Game 
 {
     private Parser parser;
+    // La habitacion actual
     private Room currentRoom;
+    // La habitacion anterior
+    private Room habitacionAnterior;
+    // Almacena las veces que se usa el comando back
+    private int contador = 0;
 
     /**
      * Create the game and initialise its internal map.
@@ -27,6 +32,7 @@ public class Game
     {
         createRooms();
         parser = new Parser();
+        habitacionAnterior = null;
     }
 
     /**
@@ -131,6 +137,9 @@ public class Game
         else if (commandWord.equals("eat")) {
             System.out.println("You have eaten now and you are not hungry any more");
         }
+        else if (commandWord.equals("back")) {
+            goHabitacionAnterior();
+        }
 
         return wantToQuit;
     }
@@ -172,9 +181,28 @@ public class Game
             System.out.println("Ahi no hay puerta!");
         }
         else {
+            habitacionAnterior = currentRoom;
             currentRoom = nextRoom;
             printLocationInfo();
             System.out.println();
+        }
+    }
+    
+    /** 
+     * Ir a una habitacion anterior
+     */
+    private void goHabitacionAnterior()
+    {        
+        if (habitacionAnterior != null && contador < 2) {            
+            Room otraHabitacion = currentRoom;
+            currentRoom = habitacionAnterior;
+            habitacionAnterior = otraHabitacion;
+            printLocationInfo();
+            System.out.println();
+            contador++;
+        }
+        else {
+            System.out.println("No puedes volver a ningun sitio!");
         }
     }
 
