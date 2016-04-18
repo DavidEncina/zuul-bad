@@ -59,12 +59,12 @@ public class Game
         armeria.setExit("north", celda2);
         
         // crea un item en las habitaciones
-        entrada.creaItem("piedra", 0.20f);
-        salaPrincipal.creaItem("antorcha", 0.50f);
-        celda1.creaItem("hueso", 0.25f);
-        celda2.creaItem("escudo", 2.20f);
-        pasillo.creaItem("piedra", 0.15f);
-        armeria.creaItem("espada", 1.50f);        
+
+        salaPrincipal.addItem(new Item("antorcha", 0.50f));
+        celda1.addItem(new Item("hueso", 0.25f));
+        celda2.addItem(new Item("escudo", 2.20f));
+        pasillo.addItem(new Item("piedra", 0.15f));
+        armeria.addItem(new Item("espada", 1.50f));        
 
         currentRoom = entrada;  // start game outside
     }
