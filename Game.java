@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 /**
  *  This class is the main class of the "World of Zuul" application. 
  *  "World of Zuul" is a very simple, text based adventure game.  Users 
@@ -22,8 +24,8 @@ public class Game
     private Room currentRoom;
     // La habitacion anterior
     private Room habitacionAnterior;
-    // Almacena las veces que se usa el comando back
-    private int contador = 0;
+    // Apila todas las habitaciones en las que se ha estado
+    private Stack<Room> habitacionesAnteriores;
 
     /**
      * Create the game and initialise its internal map.
@@ -33,6 +35,7 @@ public class Game
         createRooms();
         parser = new Parser();
         habitacionAnterior = null;
+        habitacionesAnteriores = new Stack<Room>();
     }
 
     /**
@@ -63,7 +66,7 @@ public class Game
         pasillo.setExit("southEast", armeria);
         armeria.setExit("northWest", pasillo);
         armeria.setExit("north", celda2);
-        
+
         // crea un item en las habitaciones
 
         salaPrincipal.addItem(new Item("antorcha", 0.50f));
@@ -126,8 +129,13 @@ public class Game
             printHelp();
         }
         else if (commandWord.equals("go")) {
+            habitacionAnterior = currentRoom;
             goRoom(command);
+            if(habitacionAnterior != currentRoom){
+                habitacionesAnteriores.push(habitacionAnterior);
+            }
         }
+
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
         }
@@ -139,6 +147,7 @@ public class Game
         }
         else if (commandWord.equals("back")) {
             goHabitacionAnterior();
+            System.out.println(currentRoom.getLongDescription());
         }
 
         return wantToQuit;
@@ -186,23 +195,20 @@ public class Game
             printLocationInfo();
             System.out.println();
         }
-    }
-    
+    }   
+
     /** 
      * Ir a una habitacion anterior
      */
     private void goHabitacionAnterior()
     {        
-        if (habitacionAnterior != null && contador < 2) {            
-            Room otraHabitacion = currentRoom;
-            currentRoom = habitacionAnterior;
-            habitacionAnterior = otraHabitacion;
-            printLocationInfo();
-            System.out.println();
-            contador++;
+        if (!habitacionesAnteriores.empty()) {            
+            currentRoom = habitacionesAnteriores.pop();
         }
         else {
             System.out.println("No puedes volver a ningun sitio!");
+            System.out.println("==============================================================================================\n");
+            
         }
     }
 
