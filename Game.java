@@ -13,7 +13,7 @@ import java.util.Stack;
  *  rooms, creates the parser and starts the game.  It also evaluates and
  *  executes the commands that the parser returns.
  * 
- * @author  Michael KÃ¶lling and David J. Barnes
+ * @author  Michael Kölling and David J. Barnes
  * @version 2011.07.31
  */
 
@@ -26,6 +26,8 @@ public class Game
     private Room habitacionAnterior;
     // Apila todas las habitaciones en las que se ha estado
     private Stack<Room> habitacionesAnteriores;
+    // Dice si hay o no habitacion deonde desplazarse
+    private boolean hayHabitacion;
 
     /**
      * Create the game and initialise its internal map.
@@ -36,6 +38,7 @@ public class Game
         parser = new Parser();
         habitacionAnterior = null;
         habitacionesAnteriores = new Stack<Room>();
+        hayHabitacion = false;
     }
 
     /**
@@ -130,8 +133,8 @@ public class Game
         }
         else if (commandWord.equals("go")) {
             habitacionAnterior = currentRoom;
-            goRoom(command);
-            if(habitacionAnterior != currentRoom){
+            goRoom(command);            
+            if(habitacionAnterior != currentRoom && hayHabitacion){
                 habitacionesAnteriores.push(habitacionAnterior);
             }
         }
@@ -188,12 +191,14 @@ public class Game
 
         if (nextRoom == null) {
             System.out.println("Ahi no hay puerta!");
+            hayHabitacion = false;
         }
         else {
             habitacionAnterior = currentRoom;
             currentRoom = nextRoom;
             printLocationInfo();
             System.out.println();
+            hayHabitacion = true;
         }
     }   
 
