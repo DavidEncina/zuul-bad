@@ -15,14 +15,18 @@ public class Player
     private Stack<Room> habitacionesAnteriores;
     // Los objetos que lleva el jugador
     private ArrayList<Item> mochila;
+    // Almacena el peso maximo que puede llevar el jugador
+    private float pesoMaximo;
 
     /**
      * Constructor for objects of class Player
      */
-    public Player()
+    public Player(float pesoMaximo)
     {
         currentRoom = null;
         habitacionesAnteriores = new Stack<Room>();
+        this.pesoMaximo = pesoMaximo;
+        mochila = new ArrayList<>();
     }
 
     /** 
@@ -86,5 +90,22 @@ public class Player
             habitacionesAnteriores.push(currentRoom);            
         }
         currentRoom = room;
+    }
+    
+    /**
+     * Metodo para que el jugador coja y almacene objetos
+     */
+    public void cogerObjeto(String descripcion)
+    {
+        Item objeto = currentRoom.buscarObjeto(descripcion);
+        if (objeto != null) {
+            mochila.add(objeto);
+            System.out.println("Has cogido el objeto " + descripcion);            
+            currentRoom.borrarObjeto(objeto);
+            printLocationInfo();
+        } 
+        else {
+            System.out.println("No hay ningun objeto " + descripcion + " en la habitacion");
+        }
     }
 }

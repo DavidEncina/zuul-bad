@@ -106,4 +106,34 @@ public class Room
     {
         objetos.add(objeto);
     }
+    
+    /**
+     * Busca un objeto en la lista de objetos que hay en la habitacion
+     */
+    public Item buscarObjeto(String descripcion)
+    {
+        Item objeto = null;
+        boolean objetoEncontrado = false;
+        for (int i = 0; i < objetos.size() && !objetoEncontrado; i++) {
+            if (objetos.get(i).getDescripcion().equals(descripcion)) {
+                objeto = objetos.get(i);
+                objetoEncontrado = true;
+            }
+        }
+        return objeto;
+    }
+    
+    /**
+     * Elimina un objeto de la habitacion
+     */
+    public void borrarObjeto(Item objeto)
+    {
+        boolean objetoEncontrado = false;
+        for (int i = 0; i < objetos.size() && !objetoEncontrado; i++) {
+            if (objetos.get(i).getDescripcion().equals(objeto.getDescripcion())) {
+                objetos.remove(objetos.get(i));
+                objetoEncontrado = true;
+            }
+        }
+    }
 }

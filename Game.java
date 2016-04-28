@@ -34,7 +34,7 @@ public class Game
      */
     public Game() 
     {
-        jugador = new Player();
+        jugador = new Player(3);
         createRooms();
         parser = new Parser();
         habitacionAnterior = null;
@@ -139,7 +139,7 @@ public class Game
             wantToQuit = quit(command);
         }
         else if (commandWord.equals("look")) {
-            System.out.println(currentRoom.getLongDescription());
+            jugador.printLocationInfo();
         }
         else if (commandWord.equals("eat")) {
             System.out.println("You have eaten now and you are not hungry any more");
@@ -147,6 +147,15 @@ public class Game
         else if (commandWord.equals("back")) {
             jugador.goHabitacionAnterior();
             jugador.printLocationInfo();
+        }
+        else if (commandWord.equals("take")) {
+            jugador.cogerObjeto(command.getSecondWord());
+        }
+        else if (commandWord.equals("drop")) {
+            
+        }
+        else if (commandWord.equals("items")) {
+            
         }
 
         return wantToQuit;
