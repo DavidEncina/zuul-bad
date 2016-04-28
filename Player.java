@@ -101,16 +101,19 @@ public class Player
     public void cogerObjeto(String descripcion)
     {
         Item objeto = currentRoom.buscarObjeto(descripcion);
-        if (objeto != null && pesoActual + objeto.getPeso() < pesoMaximo) {
+        if (objeto != null && pesoActual + objeto.getPeso() < pesoMaximo && objeto.getSeCoge()) {
             mochila.add(objeto);
             pesoActual += objeto.getPeso();
             System.out.println("Has cogido el objeto " + descripcion);            
             currentRoom.borrarObjeto(objeto);
             printLocationInfo();
         }
+        else if (!objeto.getSeCoge()) {
+            System.out.println("Este objeto no se puede coger");
+        }
         else if (pesoActual + objeto.getPeso() >= pesoMaximo) {
             System.out.println("No puedes coger el objeto " + descripcion + " porque pesa demasiado");
-        }
+        }        
         else {
             System.out.println("No hay ningun objeto " + descripcion + " en la habitacion");
         }
