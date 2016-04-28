@@ -20,12 +20,6 @@ import java.util.Stack;
 public class Game 
 {
     private Parser parser;
-    // La habitacion actual
-    private Room currentRoom;
-    // La habitacion anterior
-    private Room habitacionAnterior;
-    // Apila todas las habitaciones en las que se ha estado
-    private Stack<Room> habitacionesAnteriores;
     // Almacena al juga
     private Player jugador;
 
@@ -34,10 +28,9 @@ public class Game
      */
     public Game() 
     {
-        jugador = new Player(3);
+        jugador = new Player(1);
         createRooms();
         parser = new Parser();
-        habitacionAnterior = null;
     }
 
     /**
@@ -71,7 +64,7 @@ public class Game
 
         // crea un item en las habitaciones
 
-        salaPrincipal.addItem(new Item("antorcha", 0.50f));
+        salaPrincipal.addItem(new Item("antorcha", 1));
         celda1.addItem(new Item("hueso", 0.25f));
         celda2.addItem(new Item("escudo", 2.20f));
         pasillo.addItem(new Item("piedra", 0.15f));
@@ -131,7 +124,6 @@ public class Game
             printHelp();
         }
         else if (commandWord.equals("go")) {
-            habitacionAnterior = currentRoom;
             jugador.goRoom(command);
         }
 

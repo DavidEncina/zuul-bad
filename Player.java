@@ -17,6 +17,8 @@ public class Player
     private ArrayList<Item> mochila;
     // Almacena el peso maximo que puede llevar el jugador
     private float pesoMaximo;
+    // Almacena el pèso que lleva en cada momento
+    private float pesoActual;
 
     /**
      * Constructor for objects of class Player
@@ -27,6 +29,7 @@ public class Player
         habitacionesAnteriores = new Stack<Room>();
         this.pesoMaximo = pesoMaximo;
         mochila = new ArrayList<>();
+        pesoActual = 0;
     }
 
     /** 
@@ -98,12 +101,16 @@ public class Player
     public void cogerObjeto(String descripcion)
     {
         Item objeto = currentRoom.buscarObjeto(descripcion);
-        if (objeto != null) {
+        if (objeto != null && pesoActual + objeto.getPeso() < pesoMaximo) {
             mochila.add(objeto);
+            pesoActual += objeto.getPeso();
             System.out.println("Has cogido el objeto " + descripcion);            
             currentRoom.borrarObjeto(objeto);
             printLocationInfo();
-        } 
+        }
+        else if (pesoActual + objeto.getPeso() >= pesoMaximo) {
+            System.out.println("No puedes coger el objeto " + descripcion + " porque pesa demasiado");
+        }
         else {
             System.out.println("No hay ningun objeto " + descripcion + " en la habitacion");
         }
