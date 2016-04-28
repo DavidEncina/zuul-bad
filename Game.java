@@ -146,10 +146,11 @@ public class Game
             jugador.cogerObjeto(command.getSecondWord());
         }
         else if (commandWord.equals("drop")) {
-            
+            jugador.dejarObjeto(command.getSecondWord());
+            jugador.printLocationInfo();
         }
         else if (commandWord.equals("items")) {
-            
+            jugador.verMochila();
         }
 
         return wantToQuit;

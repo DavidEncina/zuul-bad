@@ -118,4 +118,40 @@ public class Player
             System.out.println("No hay ningun objeto " + descripcion + " en la habitacion");
         }
     }
+    
+    /**
+     * Metodo para que el jugador tire objetos en la habitacion
+     */
+    public void dejarObjeto(String descripcion)
+    {
+        Item objeto = buscarObjeto(descripcion);
+        mochila.remove(objeto);
+        currentRoom.addItem(objeto);
+    }
+    
+    /**
+     * Busca un objeto en la lista de objetos que lleva el jugador
+     */
+    public Item buscarObjeto(String descripcion)
+    {
+        Item objeto = null;
+        boolean objetoEncontrado = false;
+        for (int i = 0; i < mochila.size() && !objetoEncontrado; i++) {
+            if (mochila.get(i).getDescripcion().equals(descripcion)) {
+                objeto = mochila.get(i);
+                objetoEncontrado = true;
+            }
+        }
+        return objeto;
+    }
+    
+    /**
+     * Imprime los objetos que lleva el jugador
+     */
+    public void verMochila()
+    {
+        for (Item objeto : mochila) {
+            System.out.println(objeto);
+        }
+    }
 }
