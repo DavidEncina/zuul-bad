@@ -20,25 +20,16 @@ import java.util.Stack;
 public class Game 
 {
     private Parser parser;
-    // La habitacion actual
-    private Room currentRoom;
-    // La habitacion anterior
-    private Room habitacionAnterior;
-    // Apila todas las habitaciones en las que se ha estado
-    private Stack<Room> habitacionesAnteriores;
-    // Dice si hay o no habitacion deonde desplazarse
-    private boolean hayHabitacion;
-
+    // Almacena al juga
+    private Player jugador;
     /**
      * Create the game and initialise its internal map.
      */
     public Game() 
     {
+        jugador = new Player(1);
         createRooms();
         parser = new Parser();
-        habitacionAnterior = null;
-        habitacionesAnteriores = new Stack<Room>();
-        hayHabitacion = false;
     }
 
     /**
@@ -71,14 +62,16 @@ public class Game
         armeria.setExit("north", celda2);
 
         // crea un item en las habitaciones
+        
+        entrada.addItem(new Item("mesa", 22, false));
+        entrada.addItem(new Item("piedra", 0.15f, true));
+        salaPrincipal.addItem(new Item("antorcha", 1, true));
+        celda1.addItem(new Item("hueso", 0.25f, true));
+        celda2.addItem(new Item("escudo", 2.20f, true));
+        pasillo.addItem(new Item("piedra", 0.15f, true));
+        armeria.addItem(new Item("espada", 1.50f, true));        
 
-        salaPrincipal.addItem(new Item("antorcha", 0.50f));
-        celda1.addItem(new Item("hueso", 0.25f));
-        celda2.addItem(new Item("escudo", 2.20f));
-        pasillo.addItem(new Item("piedra", 0.15f));
-        armeria.addItem(new Item("espada", 1.50f));        
-
-        currentRoom = entrada;  // start game outside
+        jugador.setRoom(entrada);  // start game outside
     }
 
     /**
@@ -109,7 +102,7 @@ public class Game
         System.out.println("El Mundo de Zuul es un nuevo juego, y es una aventura muy aburrida.");
         System.out.println("Ecribe 'help' si necesitas ayuda.");
         System.out.println();
-        printLocationInfo();
+        jugador.printLocationInfo();
         System.out.println();
     }
 
@@ -132,31 +125,35 @@ public class Game
             printHelp();
         }
         else if (commandWord.equals("go")) {
-            habitacionAnterior = currentRoom;
-            goRoom(command);            
-            if(habitacionAnterior != currentRoom && hayHabitacion){
-                habitacionesAnteriores.push(habitacionAnterior);
-            }
+            jugador.goRoom(command);
         }
 
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
         }
         else if (commandWord.equals("look")) {
-            System.out.println(currentRoom.getLongDescription());
+            jugador.printLocationInfo();
         }
         else if (commandWord.equals("eat")) {
             System.out.println("You have eaten now and you are not hungry any more");
         }
         else if (commandWord.equals("back")) {
-            goHabitacionAnterior();
-            System.out.println(currentRoom.getLongDescription());
+            jugador.goHabitacionAnterior();
+            jugador.printLocationInfo();
+        }
+        else if (commandWord.equals("take")) {
+            jugador.cogerObjeto(command.getSecondWord());
+        }
+        else if (commandWord.equals("drop")) {
+            jugador.dejarObjeto(command.getSecondWord());
+            jugador.printLocationInfo();
+        }
+        else if (commandWord.equals("items")) {
+            jugador.verMochila();
         }
 
         return wantToQuit;
     }
-
-    // implementations of user commands:
 
     /**
      * Print out some help information.
@@ -173,51 +170,6 @@ public class Game
     }
 
     /** 
-     * Try to go in one direction. If there is an exit, enter
-     * the new room, otherwise print an error message.
-     */
-    private void goRoom(Command command) 
-    {
-        if(!command.hasSecondWord()) {
-            // if there is no second word, we don't know where to go...
-            System.out.println("Go where?");
-            return;
-        }
-
-        String direction = command.getSecondWord();
-
-        // Try to leave current room.
-        Room nextRoom = currentRoom.getExit(direction);        
-
-        if (nextRoom == null) {
-            System.out.println("Ahi no hay puerta!");
-            hayHabitacion = false;
-        }
-        else {
-            habitacionAnterior = currentRoom;
-            currentRoom = nextRoom;
-            printLocationInfo();
-            System.out.println();
-            hayHabitacion = true;
-        }
-    }   
-
-    /** 
-     * Ir a una habitacion anterior
-     */
-    private void goHabitacionAnterior()
-    {        
-        if (!habitacionesAnteriores.empty()) {            
-            currentRoom = habitacionesAnteriores.pop();
-        }
-        else {
-            System.out.println("No puedes volver a ningun sitio!");
-            System.out.println("==============================================================================================\n");
-            
-        }
-    }
-
-    /** 
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
      * @return true, if this command quits the game, false otherwise.
@@ -231,13 +183,6 @@ public class Game
         else {
             return true;  // signal that we want to quit
         }
-    }
 
-    /**
-     * Metodo interno para imprimir las localizaciones
-     */
-    private void printLocationInfo()
-    {
-        System.out.println(currentRoom.getLongDescription());
-    }
+    }    
 }

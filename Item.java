@@ -11,14 +11,17 @@ public class Item
     private String descripcion;
     // Almacena el peso del objeto
     private float peso;
+    // Almacena si es posible coger un objeto
+    private boolean seCoge;
 
     /**
      * Constructor for objects of class Item
      */
-    public Item(String descripcion, float peso)
+    public Item(String descripcion, float peso, boolean seCoge)
     {
         this.descripcion = descripcion;
         this.peso = peso;
+        this.seCoge = seCoge;
     }
 
     /**
@@ -35,6 +38,14 @@ public class Item
     public float getPeso()
     {
         return peso;
+    }
+    
+    /**
+     * Devuelve si el objeto se puede coger
+     */
+    public boolean getSeCoge()
+    {
+        return seCoge;
     }
     
     /**
