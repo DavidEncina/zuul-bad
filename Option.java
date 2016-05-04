@@ -7,5 +7,24 @@
  */
 public enum Option
 {
-    GO, QUIT, HELP, LOOK, EAT, BACK, TAKE, DROP, ITEMS, UNKNOWN
+    GO("andare"), QUIT("smettere"), HELP("aiuto"), LOOK("guarda"), EAT("mangiare"), BACK("indietro"), TAKE("prendere"), DROP("buttare"), ITEMS("elementi"),
+    UNKNOWN("sconosciuto");
+    private String command;
+    
+    /**
+     * Constructor de la clase Option
+     */
+    private Option(String command)
+    {
+        this.command = command;
+    }
+    
+    public String getCommand()
+    {
+        return command;
+    }
 }
+
+
+
+
