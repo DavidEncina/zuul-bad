@@ -100,7 +100,7 @@ public class Game
         System.out.println();
         System.out.println("Bienvenido al Mundo de Zuul!");
         System.out.println("El Mundo de Zuul es un nuevo juego, y es una aventura muy aburrida.");
-        System.out.println("Ecribe 'help' si necesitas ayuda.");
+        System.out.println("Ecribe 'aiuto' si necesitas ayuda.");
         System.out.println();
         jugador.printLocationInfo();
         System.out.println();
