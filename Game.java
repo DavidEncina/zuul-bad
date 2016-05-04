@@ -121,35 +121,44 @@ public class Game
         }
 
         Option commandWord = command.getCommandWord();
-        if (commandWord == Option.HELP) {
+        switch (commandWord) {
+            case HELP:
             printHelp();
-        }
-        else if (commandWord == Option.GO) {
+            break;
+        
+            case GO: 
             jugador.goRoom(command);
-        }
+            break;
 
-        else if (commandWord == Option.QUIT) {
+            case QUIT: 
             wantToQuit = quit(command);
-        }
-        else if (commandWord == Option.LOOK) {
+            break;
+        
+            case LOOK: 
             jugador.printLocationInfo();
-        }
-        else if (commandWord == Option.EAT) {
+            break;
+        
+            case EAT: 
             System.out.println("You have eaten now and you are not hungry any more");
-        }
-        else if (commandWord == Option.BACK) {
+            break;
+        
+            case BACK: 
             jugador.goHabitacionAnterior();
             jugador.printLocationInfo();
-        }
-        else if (commandWord == Option.TAKE) {
+            break;
+        
+            case TAKE: 
             jugador.cogerObjeto(command.getSecondWord());
-        }
-        else if (commandWord == Option.DROP) {
+            break;
+        
+            case DROP: 
             jugador.dejarObjeto(command.getSecondWord());
             jugador.printLocationInfo();
-        }
-        else if (commandWord == Option.ITEMS) {
+            break;
+        
+            case ITEMS: 
             jugador.verMochila();
+            break;
         }
 
         return wantToQuit;
