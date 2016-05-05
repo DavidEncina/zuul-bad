@@ -19,6 +19,10 @@ public class Player
     private float pesoMaximo;
     // Almacena el pèso que lleva en cada momento
     private float pesoActual;
+    // Almacena la vida maxima que puede tener el jugador
+    private final static int VIDAMAXIMA = 10;
+    // Almacena la vida que tiene el personaje. Comienza en 10
+    private int vidaActual;
 
     /**
      * Constructor for objects of class Player
@@ -31,7 +35,7 @@ public class Player
         this.pesoMaximo = pesoMaximo;
         mochila = new ArrayList<>();
         pesoActual = 0;
-
+        vidaActual = 10;
     }
 
     /** 
