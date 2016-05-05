@@ -138,8 +138,9 @@ public class Game
             jugador.printLocationInfo();
             break;
         
-            case EAT: 
-            System.out.println("You have eaten now and you are not hungry any more");
+            case EAT:      //wantToQuit tiene que devolver true para que se acabe el juego
+          
+            wantToQuit = jugador.getSinVida();
             break;
         
             case BACK: 

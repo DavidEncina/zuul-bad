@@ -23,6 +23,8 @@ public class Player
     private final static int VIDAMAXIMA = 10;
     // Almacena la vida que tiene el personaje. Comienza en 10
     private int vidaActual;
+    // Almacena si el jugador tiene aún vida o no
+    private boolean sinVida;
 
     /**
      * Constructor for objects of class Player
@@ -36,6 +38,7 @@ public class Player
         mochila = new ArrayList<>();
         pesoActual = 0;
         vidaActual = 10;
+        boolean sinVida = false;
     }
 
     /** 
@@ -158,5 +161,46 @@ public class Player
         for (Item objeto : mochila) {
             System.out.println(objeto);
         }
+    }
+    
+    /**
+     * Aumenta la vida del jugador.
+     * No se podra superar la vida maxima de este
+     */
+    public void sumarVida()
+    {
+        if (vidaActual == VIDAMAXIMA) {
+            System.out.println("Ya tienes la vida al maximo");
+        }
+        else if (vidaActual + 5 >= VIDAMAXIMA) {
+            vidaActual = 10;
+        }
+        else {
+            vidaActual = vidaActual + 5;
+        }
+    }
+    
+    /**
+     * Resta puntos de vida al jugador
+     * Si llega a cero se pierde el juego
+     */
+    public void restarVida() 
+    {        
+        if (vidaActual - 5 > 0) {
+            vidaActual = vidaActual - 5;
+        }
+        else {
+            System.out.println("Te has quedado sin vida");
+            System.out.println("----------------------  GAME OVER  -----------------------");
+            sinVida = true;
+        }
+    }
+    
+    /**
+     * Devielve si el jugador tiene aún vida o no
+     */
+    public boolean getSinVida() 
+    {
+        return sinVida;
     }
 }
