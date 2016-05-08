@@ -19,6 +19,12 @@ public class Player
     private float pesoMaximo;
     // Almacena el pèso que lleva en cada momento
     private float pesoActual;
+    // Almacena la vida maxima que puede tener el jugador
+    private final static int VIDAMAXIMA = 10;
+    // Almacena la vida que tiene el personaje. Comienza en 10
+    private int vidaActual;
+    // Almacena si el jugador tiene aún vida o no
+    private boolean sinVida;
 
     /**
      * Constructor for objects of class Player
@@ -31,7 +37,8 @@ public class Player
         this.pesoMaximo = pesoMaximo;
         mochila = new ArrayList<>();
         pesoActual = 0;
-
+        vidaActual = 10;
+        boolean sinVida = false;
     }
 
     /** 
@@ -58,6 +65,7 @@ public class Player
             habitacionesAnteriores.push(currentRoom);            
             currentRoom = nextRoom;
             printLocationInfo();
+            System.out.println("Vida del jugador: " + vidaActual + "/" + VIDAMAXIMA);
             System.out.println();
         }
     }
@@ -154,5 +162,90 @@ public class Player
         for (Item objeto : mochila) {
             System.out.println(objeto);
         }
+    }
+    
+    /**
+     * Aumenta la vida del jugador.
+     * No se podra superar la vida maxima de este
+     */
+    public void sumarVida()
+    {
+        if (vidaActual == VIDAMAXIMA) {
+            System.out.println("Ya tenias la vida al maximo, " + vidaActual + "/" + VIDAMAXIMA);
+        }
+        else if (vidaActual + 5 >= VIDAMAXIMA) {
+            vidaActual = 10;
+            System.out.println("Tu vida esta ahora al maximo, " + vidaActual + "/" + VIDAMAXIMA);
+        }
+        else {
+            vidaActual = vidaActual + 5;
+            System.out.println("Tu vida es " + vidaActual + "/" + VIDAMAXIMA);
+        }
+    }
+    
+    /**
+     * Resta puntos de vida al jugador
+     * Si llega a cero se pierde el juego
+     */
+    public void restarVida() 
+    {        
+        if (vidaActual - 5 > 0) {
+            vidaActual = vidaActual - 5;
+            System.out.println("Tu vida es " + vidaActual + "/" + VIDAMAXIMA);
+        }
+        else {
+            System.out.println("Te has quedado sin vida");
+            System.out.println("----------------------  GAME OVER  -----------------------");
+            sinVida = true;
+        }
+    }
+    
+    /**
+     * Devielve si el jugador tiene aún vida o no
+     */
+    public boolean getSinVida() 
+    {
+        return sinVida;
+    }
+    
+    /**
+     * Si es comestible, el jugador come un objeto que tiene en su mochila
+     */
+    public void comerObjeto(String objeto)
+    {
+        if (buscarObjeto(objeto) != null) {
+            Item obj = buscarObjeto(objeto);
+            if (obj.getComestible() == true) {
+                System.out.println("Te has comido un/a " + objeto);
+                mochila.remove(obj);
+                if (obj.getEstado() == true) {
+                    System.out.println("Esta muy bueno. Te ha subido la vida");
+                    sumarVida();
+                }
+                else {
+                    System.out.println("Estaba en mal estado. Te ha bajado la vida");
+                    restarVida();
+                }                
+            }
+            else {
+                System.out.println("Un/a " + objeto + " no se puede comer");
+            }
+        }
+    }
+    
+    /**
+     * Devuelve la vida que tiene el jugador en ese momento
+     */
+    public int getVidaActual()
+    {
+        return vidaActual;
+    }
+    
+    /**
+     * Devuelve la vida maxima que tiene el jugador
+     */
+    public int getVidaMaxima()
+    {
+        return VIDAMAXIMA;
     }
 }

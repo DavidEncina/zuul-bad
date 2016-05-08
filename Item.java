@@ -13,15 +13,21 @@ public class Item
     private float peso;
     // Almacena si es posible coger un objeto
     private boolean seCoge;
+    // Almacena si el objeto esta en buen estado o no
+    private boolean buenEstado;
+    // Almacena si el objeto es comestible o no
+    private boolean comestible;
 
     /**
      * Constructor for objects of class Item
      */
-    public Item(String descripcion, float peso, boolean seCoge)
+    public Item(String descripcion, float peso, boolean seCoge, boolean buenEstado, boolean comestible)
     {
         this.descripcion = descripcion;
         this.peso = peso;
         this.seCoge = seCoge;
+        this.buenEstado = buenEstado;
+        this.comestible = comestible;
     }
 
     /**
@@ -46,6 +52,22 @@ public class Item
     public boolean getSeCoge()
     {
         return seCoge;
+    }
+    
+    /**
+     * Devuelve si el objeto se puede comer
+     */
+    public boolean getComestible()
+    {
+        return comestible;
+    }
+    
+    /**
+     * Devuelve el estado del objeto
+     */
+    public boolean getEstado()
+    {
+        return buenEstado;
     }
     
     /**

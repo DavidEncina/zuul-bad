@@ -1,0 +1,8 @@
+VIDA DE PERSONAJE
+
+Consiste en que el jugador tendrá una serie de puntos de vida. Empieza con 10 pv. Estos podrán bajar o subir dependiendo de las acciones que se lleven a cabo en el juego. Si come un alimento y sus pv no están al máximo, recuperará 5 pv. Si el alimento está en mal estado perderá 5 pv. Si los pv llegan a 0 se perderá el juego.
+
+
+PUERTAS CERRADAS
+
+Habrá puertas entre localizaciones que estén cerradas. El personaje deberá encontrar las llaves que abran dichas puertas para poder entrar. Una llave abrirá todas las puertas de la habitación a la que correstponde.
