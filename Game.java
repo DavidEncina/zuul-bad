@@ -63,13 +63,16 @@ public class Game
 
         // crea un item en las habitaciones
         
-        entrada.addItem(new Item("mesa", 22, false));
-        entrada.addItem(new Item("piedra", 0.15f, true));
-        salaPrincipal.addItem(new Item("antorcha", 1, true));
-        celda1.addItem(new Item("hueso", 0.25f, true));
-        celda2.addItem(new Item("escudo", 2.20f, true));
-        pasillo.addItem(new Item("piedra", 0.15f, true));
-        armeria.addItem(new Item("espada", 1.50f, true));        
+        entrada.addItem(new Item("mesa", 22, false, true, false));
+        entrada.addItem(new Item("piedra", 0.15f, true, true, false));
+        salaPrincipal.addItem(new Item("antorcha", 1, true, true, false));
+        salaPrincipal.addItem(new Item("manzana", 0.2f, true, true, true));
+        salaPrincipal.addItem(new Item("jamon", 0.2f, true, false, true));
+        celda1.addItem(new Item("hueso", 0.25f, true, true, false));
+        celda1.addItem(new Item("pescado", 0.25f, true, false, true));
+        celda2.addItem(new Item("escudo", 2.20f, true, true, false));
+        pasillo.addItem(new Item("piedra", 0.15f, true, true, false));
+        armeria.addItem(new Item("espada", 1.50f, true, true, false));        
 
         jugador.setRoom(entrada);  // start game outside
     }
@@ -103,6 +106,7 @@ public class Game
         System.out.println("Ecribe " + Option.HELP.getCommand() + " si necesitas ayuda.");
         System.out.println();
         jugador.printLocationInfo();
+        System.out.println("Vida del jugador: " + jugador.getVidaActual() + "/" + jugador.getVidaMaxima());
         System.out.println();
     }
 
@@ -138,8 +142,8 @@ public class Game
             jugador.printLocationInfo();
             break;
         
-            case EAT:      //wantToQuit tiene que devolver true para que se acabe el juego
-          
+            case EAT:
+            jugador.comerObjeto(command.getSecondWord());
             wantToQuit = jugador.getSinVida();
             break;
         
