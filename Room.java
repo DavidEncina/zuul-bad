@@ -32,6 +32,7 @@ public class Room
         this.description = description;
         salidas = new HashMap<String, Room>();
         objetos = new ArrayList<Item>();
+        
     }
 
     /**
