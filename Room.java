@@ -20,6 +20,8 @@ public class Room
     private String description;
     private HashMap<String, Room> salidas;
     private ArrayList<Item> objetos;
+    private boolean puertaAbierta;
+    private HashMap<String, Boolean> puertas;
 
     /**
      * Create a room described "description". Initially, it has
@@ -32,17 +34,25 @@ public class Room
         this.description = description;
         salidas = new HashMap<String, Room>();
         objetos = new ArrayList<Item>();
-        
+        puertas = new HashMap<String, Boolean>();
     }
 
     /**
      * Define an exit from this room.
-     * @param direction The direction of the exit.
-     * @param neighbor The room in the given direction.
+     * Devuelve si la puerta a otra habitacion esta abierta o no
      */
-    public void setExit(String direction, Room neighbor)
+    public void setExit(String direction, Room neighbor, boolean puerta)
     {
         salidas.put(direction, neighbor);
+        puertas.put(direction, puerta);
+    }
+    
+    /**
+     * Devuelve si la puerta a otra habitacion esta abierta o no
+     */
+    public boolean getPuertaAbierta(String direction)
+    {        
+        return puertas.get(direction);
     }
 
     /**

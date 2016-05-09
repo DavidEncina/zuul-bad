@@ -56,10 +56,15 @@ public class Player
         String direction = command.getSecondWord();
 
         // Try to leave current room.
-        Room nextRoom = currentRoom.getExit(direction);        
+        Room nextRoom = currentRoom.getExit(direction); 
+        boolean puertaAbierta = currentRoom.getPuertaAbierta(direction);  
+        currentRoom.setExit(direction, currentRoom.getExit(direction), puertaAbierta);              
 
         if (nextRoom == null) {
             System.out.println("Ahi no hay puerta!");
+        }
+        else if (puertaAbierta == false) {
+            System.out.println("No puedes pasar. La puerta esta cerrada con llave");
         }
         else {
             habitacionesAnteriores.push(currentRoom);            

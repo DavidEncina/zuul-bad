@@ -49,17 +49,17 @@ public class Game
 
         // initialise room exits
         // norte, este, sur, oeste, sureste, noroeste
-        entrada.setExit("south", salaPrincipal);
-        salaPrincipal.setExit("north", entrada);
-        salaPrincipal.setExit("south", pasillo);
-        salaPrincipal.setExit("east", celda2);
-        salaPrincipal.setExit("west", celda1);
-        celda1.setExit("east", salaPrincipal);
-        celda2.setExit("west", salaPrincipal);
-        pasillo.setExit("north", salaPrincipal);
-        pasillo.setExit("southEast", armeria);
-        armeria.setExit("northWest", pasillo);
-        armeria.setExit("north", celda2);
+        entrada.setExit("south", salaPrincipal, true);
+        salaPrincipal.setExit("north", entrada, true);
+        salaPrincipal.setExit("south", pasillo, false);
+        salaPrincipal.setExit("east", celda2, true);
+        salaPrincipal.setExit("west", celda1, true);
+        celda1.setExit("east", salaPrincipal, true);
+        celda2.setExit("west", salaPrincipal, false);
+        pasillo.setExit("north", salaPrincipal, true);
+        pasillo.setExit("southEast", armeria, true);
+        armeria.setExit("northWest", pasillo, true);
+        armeria.setExit("north", celda2, true);
 
         // crea un item en las habitaciones
         
