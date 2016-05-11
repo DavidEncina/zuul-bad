@@ -64,7 +64,17 @@ public class Player
             System.out.println("Ahi no hay puerta!");
         }
         else if (puertaAbierta == false) {
-            System.out.println("No puedes pasar. La puerta esta cerrada con llave");
+            if (buscarLlave()) {
+                System.out.println("Has abierto la puerta con la llave que tenias");
+                habitacionesAnteriores.push(currentRoom);            
+                currentRoom = nextRoom;
+                printLocationInfo();
+                System.out.println("Vida del jugador: " + vidaActual + "/" + VIDAMAXIMA);
+                System.out.println();
+            }
+            else {
+                System.out.println("No puedes pasar. La puerta esta cerrada con llave");
+            }            
         }
         else {
             habitacionesAnteriores.push(currentRoom);            
@@ -160,6 +170,22 @@ public class Player
     }
     
     /**
+     * Devuelve el nombre de la llave si es que se tiene en la mochila
+     */
+    public boolean buscarLlave()
+    {
+        boolean llaveEncontrada = false;
+        boolean objetoEncontrado = false;
+        for (int i = 0; i < mochila.size() && !objetoEncontrado; i++) {
+            if (mochila.get(i).getDescripcion().toLowerCase().equals("llave" + currentRoom.getNombreHabitacion().toLowerCase())) {
+                llaveEncontrada = true;
+                objetoEncontrado = true;
+            }
+        }
+        return llaveEncontrada;
+    }
+    
+    /**
      * Imprime los objetos que lleva el jugador
      */
     public void verMochila()
@@ -168,7 +194,7 @@ public class Player
             System.out.println(objeto);
         }
     }
-    
+
     /**
      * Aumenta la vida del jugador.
      * No se podra superar la vida maxima de este

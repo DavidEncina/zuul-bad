@@ -22,6 +22,7 @@ public class Room
     private ArrayList<Item> objetos;
     private boolean puertaAbierta;
     private HashMap<String, Boolean> puertas;
+    private String nombreHabitacion;
 
     /**
      * Create a room described "description". Initially, it has
@@ -29,9 +30,10 @@ public class Room
      * "an open court yard".
      * @param description The room's description.
      */
-    public Room(String description) 
+    public Room(String description, String nombreHabitacion) 
     {
         this.description = description;
+        this.nombreHabitacion = nombreHabitacion;
         salidas = new HashMap<String, Room>();
         objetos = new ArrayList<Item>();
         puertas = new HashMap<String, Boolean>();
@@ -53,6 +55,14 @@ public class Room
     public boolean getPuertaAbierta(String direction)
     {        
         return puertas.get(direction);
+    }
+    
+    /**
+     * Devuelve el nombre de la habitacion
+     */
+    public String getNombreHabitacion()
+    {
+        return nombreHabitacion;
     }
 
     /**
