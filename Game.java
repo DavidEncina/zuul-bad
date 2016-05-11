@@ -40,26 +40,26 @@ public class Game
         Room entrada, salaPrincipal, celda1, celda2, pasillo, armeria;
 
         // create the rooms
-        entrada = new Room("en la entrada de la mazmorra");
-        salaPrincipal = new Room("en la sala principal de la mazmorra");
-        celda1 = new Room("en una celda vacia");
-        celda2 = new Room("en una celda con una cama rota");
-        pasillo = new Room("en un pasillo oscuro");
-        armeria = new Room("en una habitacion llena de armas");
+        entrada = new Room("en la entrada de la mazmorra", "entrada");
+        salaPrincipal = new Room("en la sala principal de la mazmorra", "salaPrincipal");
+        celda1 = new Room("en una celda vacia", "celda1");
+        celda2 = new Room("en una celda con una cama rota", "celda2");
+        pasillo = new Room("en un pasillo oscuro", "pasillo");
+        armeria = new Room("en una habitacion llena de armas", "armeria");
 
         // initialise room exits
         // norte, este, sur, oeste, sureste, noroeste
-        entrada.setExit("south", salaPrincipal);
-        salaPrincipal.setExit("north", entrada);
-        salaPrincipal.setExit("south", pasillo);
-        salaPrincipal.setExit("east", celda2);
-        salaPrincipal.setExit("west", celda1);
-        celda1.setExit("east", salaPrincipal);
-        celda2.setExit("west", salaPrincipal);
-        pasillo.setExit("north", salaPrincipal);
-        pasillo.setExit("southEast", armeria);
-        armeria.setExit("northWest", pasillo);
-        armeria.setExit("north", celda2);
+        entrada.setExit("south", salaPrincipal, true);
+        salaPrincipal.setExit("north", entrada, true);
+        salaPrincipal.setExit("south", pasillo, false);
+        salaPrincipal.setExit("east", celda2, true);
+        salaPrincipal.setExit("west", celda1, true);
+        celda1.setExit("east", salaPrincipal, true);
+        celda2.setExit("west", salaPrincipal, false);
+        pasillo.setExit("north", salaPrincipal, true);
+        pasillo.setExit("southEast", armeria, true);
+        armeria.setExit("northWest", pasillo, true);
+        armeria.setExit("north", celda2, true);
 
         // crea un item en las habitaciones
         
@@ -68,6 +68,7 @@ public class Game
         salaPrincipal.addItem(new Item("antorcha", 1, true, true, false));
         salaPrincipal.addItem(new Item("manzana", 0.2f, true, true, true));
         salaPrincipal.addItem(new Item("jamon", 0.2f, true, false, true));
+        salaPrincipal.addItem(new Item("llaveSalaPrincipal", 0.1f, true, true, false));
         celda1.addItem(new Item("hueso", 0.25f, true, true, false));
         celda1.addItem(new Item("pescado", 0.25f, true, false, true));
         celda2.addItem(new Item("escudo", 2.20f, true, true, false));
